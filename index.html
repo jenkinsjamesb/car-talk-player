@@ -6,7 +6,27 @@
     </head>
     <body>
         <div id="container">
-            
+            <form id="controls">
+                <label>
+                    Podcast ID:
+                    <input id="podcast-id" type="number" placeholder="510208" value="510208">
+                </label>
+                <label>
+                    Episode Number<span id="episode-range-label"></span>: 
+                    <input id="episode-number" type="number" min="0">
+                </label>
+                <label>
+                    Autoplay:
+                    <input id="autoplay-enabled" type="checkbox" checked>
+                </label>
+                <label>
+                    <input id="update-button" type="button" value="Go">
+                </label>
+            </form>
+            <div id="player">
+                <h4>Now Playing: <span id="episode-title"></span></h4>
+                <audio id="audio" controls="" autoplay="" name="media" data-video="0"></audio>
+            </div>
         </div>
     </body>
 
