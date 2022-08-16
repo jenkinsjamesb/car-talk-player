@@ -1,4 +1,81 @@
+:root {
+    --color-bg: #333;
+    --color-fg: #555;
+    --color-accent: #db0;
+    --color-fringe: #afa;
+    --color-text: #fff;
+    --border: 2px solid var(--color-accent);
+    --transparent: rgba(0,0,0,0);
+}
+
+body {
+    font-family: "Fira Sans", monospace;
+    color: var(--color-text);
+}
+
+#container {
+    background-color: var(--color-bg);
+}
+
+#header {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
 form {
     display: flex;
     flex-direction: column;
+}
+
+label {
+    pointer-events: none;
+}
+
+input, button {
+    accent-color: #afa;
+    color: var(--color-fringe);
+    background-color: var(--color-fg);
+    pointer-events: all;
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+#player {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#player > div {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    border: var(--border);
+    background-color: var(--color-fg);
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+#player > div > * {
+    margin: 5px;
+}
+
+#episode-title {
+    width: 60%;
+}
+
+#seek-bar {
+    width: 65%;
+}
+
+#playpause-button {
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    align-items: center;
+    font-size: large;
+    padding: 0px 3px;
+    top: 2px;
+    transition: all 0.5s;
 }

@@ -2,33 +2,52 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://code.cdn.mozilla.net/fonts/fira.css">
     </head>
     <body>
         <div id="container">
+            <div id="header">// UNDER CONSTRUCTION //</div>
             <form id="controls">
                 <label>
-                    Podcast ID:
-                    <input id="podcast-id" type="number" placeholder="510208" value="510208">
+                    Podcast ID Number (Default: Car Talk):
+                    <input id="podcast-id" type="number" placeholder="510208" value="510208" readonly>
                 </label>
                 <label>
-                    Episode Number<span id="episode-range-label"></span>: 
+                    Episode Number <span id="episode-range-label">(Fetching range...)</span>: 
                     <input id="episode-number" type="number" min="0">
                 </label>
                 <label>
-                    Autoplay:
+                    Autoplay Next Episodes:
                     <input id="autoplay-enabled" type="checkbox" checked>
                 </label>
                 <label>
-                    <input id="update-button" type="button" value="Go">
+                    Show browser default player:
+                    <input id="default-enabled" type="checkbox">
+                </label>
+                <label>
+                    <button type="button" id="update-button">Fetch Podcast</button>
                 </label>
             </form>
-            <div id="player">
-                <h4>Now Playing: <span id="episode-title"></span></h4>
-                <audio id="audio" controls="" autoplay="" name="media" data-video="0"></audio>
-            </div>
+            <form id="player">
+                <div>
+                    <h4>Now Playing: <input id="episode-title" type="text" readonly></h4>
+                </div>
+                <div>
+                    <span id="timestamp-text">00:00 / 00:00</span>
+                    <input id="seek-bar" type="range" value=0>
+                </div>
+                <div>
+                    <button id="playpause-button" type="button">Play</button>
+                    <label>
+                        Volume:
+                        <input id="volume-slider" type="range" value="100">
+                    </label>
+                </div>
+            </form>
+            <audio id="audio" controls="" autoplay="true" name="media" data-video="0" style="display: none;"></audio>
         </div>
     </body>
 
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
 </html>
