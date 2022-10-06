@@ -7,14 +7,29 @@
     </head>
     <body>
         <div id="container">
-            <div id="header">// UNDER CONSTRUCTION //</div>
+            <div id="header">&#x25b8 // uNPR Car Talk Player //</div>
+            <div id="info-div" class="info" style="height: 0px; display: none;">
+                How to use:<br>
+                <ol>
+                    <li style="display: none;">
+                        Type in ID of podcast. Find this by looking at NPR's website and looking at the URL bar.<br>
+                        ex. www.npr.org/podcasts/PODCAST_ID/PODCAST_NAME
+                    </li>
+                    <li>Wait for episode range to be fetched.</li>
+                    <li>Type desired episode number.</li>
+                    <li>Hit "Fetch Podcast".</li>
+                </ol>
+            </div>
             <form id="controls">
-                <label>
+                <label style="display: none;">
                     Podcast ID Number (Default: Car Talk):
-                    <input id="podcast-id" type="number" placeholder="510208" value="510208" readonly>
+                    <input id="podcast-id" type="number" placeholder="510208" value="510208">
                 </label>
-                <label>
-                    Episode Number <span id="episode-range-label">(Fetching range...)</span>: 
+                <label class="swap" id="standby-text" style="display: none;">
+                    <b>Stand by. Fetching Episodes...</b>
+                </label>
+                <label class="swap">
+                    Episode Number <span id="episode-range-label">(Fetching...)</span>: 
                     <input id="episode-number" type="number" min="0">
                 </label>
                 <label>
@@ -25,11 +40,11 @@
                     Show browser default player:
                     <input id="default-enabled" type="checkbox">
                 </label>
-                <label>
+                <label class="swap">
                     <button type="button" id="update-button">Fetch Podcast</button>
                 </label>
             </form>
-            <form id="player">
+            <form id="player" class="default-enabled-vis">
                 <div>
                     <h4>Now Playing: <input id="episode-title" type="text" readonly></h4>
                 </div>
@@ -45,7 +60,7 @@
                     </label>
                 </div>
             </form>
-            <audio id="audio" controls="" autoplay="true" name="media" data-video="0" style="display: none;"></audio>
+            <audio id="audio" class="default-enabled-vis" controls="" autoplay="true" name="media" data-video="0" style="display: none;"></audio>
         </div>
     </body>
 

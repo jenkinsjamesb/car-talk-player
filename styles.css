@@ -11,15 +11,31 @@
 body {
     font-family: "Fira Sans", monospace;
     color: var(--color-text);
+    overflow: hidden;
 }
 
 #container {
     background-color: var(--color-bg);
+    border: var(--border);
 }
 
 #header {
     background-color: var(--color-accent);
     color: var(--color-bg);
+    user-select: none;
+}
+
+#controls {
+    margin: 5px;
+}
+
+#controls > * {
+    padding: 1px 0px 1px 0px;
+}
+
+#info-div {
+    width: 100%;
+    transition: all 1s;
 }
 
 form {
@@ -63,10 +79,13 @@ input, button {
 
 #episode-title {
     width: 60%;
+    flex-grow: 1;
+    size: 64ch;
 }
 
 #seek-bar {
     width: 65%;
+    flex-grow: 1;
 }
 
 #playpause-button {
