@@ -83,9 +83,7 @@ const getEpisodeDataObject = async (podcastID, episodeNumber) => {
                             //mediaElement.autoplay = true;
                             // remove/factor out?
 
-                            startIndex = script.indexOf("https:\\/\\/media.npr.org\\/");
-                            stopIndex = script.indexOf("\"", startIndex);
-                            episodeDataObject.imgSrc = script.substring(startIndex, stopIndex).replaceAll("\\", "");
+                            episodeDataObject.imgSrc = audioModel.imageSrc;
                         });
                 });
 
