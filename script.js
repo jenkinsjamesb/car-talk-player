@@ -7,6 +7,7 @@ var info = {
     playState: true,
     isSeeking: false
 };
+const proxy = "https://corsproxy.io/?";
 
 // General-use functions
 const secToStamp = (secs) => String(Math.floor(secs / 60)).padStart(2, 0) + ":" + String(Math.floor(secs % 60)).padStart(2, 0);
@@ -29,7 +30,7 @@ const getEpisodeRange = (podcastID, last = 0, current = 500) => {
     return new Promise(resolve => {
         for (let i = 0; i < 5; i++) {
             try {
-                fetch("https://www.npr.org/get/" + podcastID + "/render/partial/next?start=" + current)
+                fetch(proxy + "https://www.npr.org/get/" + podcastID + "/render/partial/next?start=" + current)
                     .then(response => response.text())
                     .then(data => {
                         let doc = new DOMParser().parseFromString(data, "text/html");
@@ -59,7 +60,7 @@ const getEpisodeDataObject = async (podcastID, episodeNumber) => {
         };
 
         try {
-            await fetch("https://www.npr.org/get/" + podcastID + "/render/partial/next?start=" + episodeNumber)
+            await fetch(proxy + "https://www.npr.org/get/" + podcastID + "/render/partial/next?start=" + episodeNumber)
                 .then(response => response.text())
                 .then(async data => {
                     let dom = new DOMParser().parseFromString(data, "text/html");
@@ -69,16 +70,15 @@ const getEpisodeDataObject = async (podcastID, episodeNumber) => {
 
                     //document.getElementById("episode-title").value = title; // remove/factor out?
 
-                    await fetch(link)
+                    await fetch(proxy + link)
                         .then(response => response.text())
                         .then(data => {
                             let dom = new DOMParser().parseFromString(data, "text/html");
                             let script = dom.querySelector("main script").innerText.replace("var apiDoc = ", "");
-                            let startIndex = script.indexOf("https:\\/\\/ondemand.npr.org\\/");
-                            let stopIndex = script.indexOf("\"", startIndex);
-                            episodeDataObject.audioSrc = script.substring(startIndex, stopIndex).replaceAll("\\", "");
-                            console.log(script);
-
+                            let audioModel = JSON.parse(script.substring(script.indexOf("{"), script.indexOf(";")));
+                            console.log(audioModel)
+                            episodeDataObject.audioSrc = audioModel.audioSrc;
+                            
                             //mediaElement.src = src;
                             //mediaElement.autoplay = true;
                             // remove/factor out?
