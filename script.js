@@ -26,7 +26,7 @@ addMultipleEventListener = (element, typeList, callback) => {
 }
 
 // Gets the number of available episodes through a binary-search like check, since there isn't an easy other way
-const getEpisodeRange = (podcastID, last = 0, current = 500) => {
+const getEpisodeRange = (podcastID, last = 0, current = 2048) => {
     return new Promise(resolve => {
         for (let i = 0; i < 5; i++) {
             try {
