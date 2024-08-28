@@ -1,3 +1,4 @@
+![Maintenance Status](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 # car-talk-player
 It plays Car Talk episodes in a web browser (so I can use it on all my devices). And sometimes, it works.
 
