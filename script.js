@@ -26,7 +26,7 @@ addMultipleEventListener = (element, typeList, callback) => {
 }
 
 // Gets the number of available episodes through a binary-search like check, since there isn't an easy other way
-const getEpisodeRange = (podcastID, last = 0, current = 2048) => {
+const getEpisodeRange = (podcastID, current=1000, stage="MultInc") => {
     return new Promise(resolve => {
         for (let i = 0; i < 5; i++) {
             try {
@@ -39,8 +39,10 @@ const getEpisodeRange = (podcastID, last = 0, current = 2048) => {
                             resolve(Math.floor(current));
                             return;
                         }
-                        if (numLoaded == 0) resolve(getEpisodeRange(podcastID, 0, current / 2));
-                        else resolve(getEpisodeRange(podcastID, current, current + (current - last) / 2));
+                        console.log(current + " " + numLoaded);
+                        if (numLoaded == 0) resolve(getEpisodeRange(podcastID, current - 50, "AddDec"));
+                        else if (stage == "MultInc") resolve(getEpisodeRange(podcastID, current * 1.2, "MultInc"));
+                        else resolve(getEpisodeRange(podcastID, current + (numLoaded - 1), "GranInc"));
                     });
                 break;
             } catch (err) {
@@ -75,15 +77,15 @@ const getEpisodeDataObject = async (podcastID, episodeNumber) => {
                         .then(data => {
                             let dom = new DOMParser().parseFromString(data, "text/html");
                             let script = dom.querySelector("main script").innerText.replace("var apiDoc = ", "");
-                            let audioModel = JSON.parse(script.substring(script.indexOf("{"), script.indexOf(";")));
-                            console.log(audioModel)
-                            episodeDataObject.audioSrc = audioModel.audioSrc;
+                            //let audioModel = JSON.parse(script.substring(script.indexOf("{"), script.indexOf(";")));
+                            //console.log(audioModel)
+                            episodeDataObject.audioSrc = dom.querySelector("li.audio-tool-download > a").href
                             
                             //mediaElement.src = src;
                             //mediaElement.autoplay = true;
                             // remove/factor out?
 
-                            episodeDataObject.imgSrc = audioModel.imageSrc;
+                            //episodeDataObject.imgSrc = audioModel.imageSrc;
                         });
                 });
 
